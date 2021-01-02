@@ -60,9 +60,10 @@ function draw(){
     Engine.update(engine);
     push();
     strokeWeight(5)
-    textSize(20)
-    text( "score: "+ score, 1000, 20)
-    text ("lives: " + lives, 800, 20)
+    textSize(30)
+    textStyle(BOLD)
+    text( "Score: "+ score, 1000, 30)
+    text ("Lives: " + lives, 800, 30)
     pop();
     box1.display();
     box2.display();
@@ -104,7 +105,7 @@ function draw(){
     if (lives === 0 || score === 400){
         gamestate = "END"
         push()
-        fill(255,blink)
+        //fill(255,blink)
         textSize(20)
         textStyle(BOLD)
 
@@ -113,14 +114,14 @@ function draw(){
 
             text("WONDERFUL! SCORED MAXIMUM\n", width/2-50,height/2)
             tint(255,blink)
-            image(starImg,width/2,height/2)
+            image(starImg,width/2,height/2-150)
         }
         else if(lives === 0)
         text("GAME OVER!\n", width/2-50,height/2)
 
         text("PRESS R TO RESTART",width/2-50,height/2+50)
         
-        blink = blink - 20
+        blink = blink - 10
         if(blink < 0){
             blink = 255
         }
