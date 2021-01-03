@@ -86,7 +86,7 @@ function draw(){
     pig1.score();
     pig3.score();
     if(mouseIsPressed && gamestate === "START"){
-        if( dragged === true)
+        if( dragged === true && mouseX < 200)
         Matter.Body.setPosition( bird.body,{x: mouseX, y: mouseY});
         
     }
@@ -106,7 +106,6 @@ function draw(){
     if (lives === 0 || score === 400){
         gamestate = "END"
         push()
-        //fill(255,blink)
         textSize(20)
         textStyle(BOLD)
 
@@ -151,20 +150,6 @@ function mouseDragged(){
         }
     }
 }
-   
-/*
-function mouseReleased(){   
-    
-    if(gamestate !== "END"){//} && dragged === true){
-        if(mouseX > 0 && mouseX < 200){        
-            lives = lives - 1
-            chain1.fly();
-            gamestate = "FLY";
-            dragged = false
-        }   
-    }
-
-}*/
 function mouseReleased(){   
     
     if(gamestate !== "END" && dragged === true){
@@ -186,7 +171,7 @@ async function getBgImage(){
         bg = "sprites/bg.png"
 
     }else{
-        bg = "sprites/bg2.png"
+        bg = "sprites/bg2.jpg"
     }
     backgroundImg = loadImage(bg)
 }
