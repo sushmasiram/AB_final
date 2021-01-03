@@ -3,6 +3,8 @@ class Pig extends BaseClass {
     super(x,y,50,50);
     this.image = loadImage("sprites/enemy.png");
     this.vis = 255
+    this.pos = this.body.position
+    this.f = 0
   }
   display(){
     
@@ -24,9 +26,16 @@ class Pig extends BaseClass {
     
   }
   score(){
+    
     if(this.vis < 255 && this.vis >0){
       score = score + 4
     }
+    else if(this.vis < 0){      
+      text("+200",this.pos.x,this.pos.y+this.f)
+      this.f = this.f - 10
+    }
+      
+    
   }
 
 }

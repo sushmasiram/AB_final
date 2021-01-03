@@ -85,6 +85,18 @@ function draw(){
     chain1.display();
     pig1.score();
     pig3.score();
+
+    box1.score();
+    box2.score();
+    box3.score();
+    box4.score();
+    box5.score();
+
+    log1.score();
+    log4.score()
+    log3.score()
+    log5.score()
+
     if(mouseIsPressed && gamestate === "START"){
         if( dragged === true && mouseX < 200)
         Matter.Body.setPosition( bird.body,{x: mouseX, y: mouseY});
@@ -103,30 +115,38 @@ function draw(){
         }
         pop()
     }
-    if (lives === 0 || score === 400){
+
+    push()
+    textSize(20)
+    textStyle(BOLD)
+    fill(255)
+    if (lives === 0 || score === 1100){
         gamestate = "END"
-        push()
-        textSize(20)
-        textStyle(BOLD)
-
         
-        if(score === 400){
-
-            text("CONGRATULATIONS! SCORED 400\n", width/2-50,height/2)
-            tint(255,blink)
-            image(starImg,width/2,height/2-150)
-        }
-        else if(lives === 0)
-        text("GAME OVER!\n", width/2-50,height/2)
-
-        text("PRESS R TO RESTART",width/2-50,height/2+50)
+    }
+    if(bird.body.position.y > 250 && gamestate === "END"){
         
-        blink = blink - 10
-        if(blink < 0){
-            blink = 255
-        }
-        pop()        
+            if(score === 1100){
+
+                text("CONGRATULATIONS! SCORED FULL\n", width/2-50,height/2)
+                tint(255,blink)
+                image(starImg,width/2,height/2-150)
+            }
+            else if(lives === 0 && score > 500){
+                text("Nice Try!", width/2-50,height/2)
+
+            }else
+            text("GAME OVER!\n", width/2-50,height/2)
+
+            text("PRESS R TO RESTART",width/2-50,height/2+50)
+            
+            blink = blink - 10
+            if(blink < 0){
+                blink = 255
+            }
+               
     }   
+    pop() 
 
 }
 function keyPressed(){
