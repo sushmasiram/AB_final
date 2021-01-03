@@ -11,7 +11,7 @@ var gamestate = "START"
 var blink = 255
 
 var lives = 5
-
+var dragged = false
 var score = 0
 function preload() {
     backgroundImg1 = loadImage("sprites/bg.png");
@@ -86,6 +86,7 @@ function draw(){
     pig1.score();
     pig3.score();
     if(mouseIsPressed && gamestate === "START"){
+        if( dragged === true)
         Matter.Body.setPosition( bird.body,{x: mouseX, y: mouseY});
         
     }
@@ -112,7 +113,7 @@ function draw(){
         
         if(score === 400){
 
-            text("WONDERFUL! SCORED MAXIMUM\n", width/2-50,height/2)
+            text("CONGRATULATIONS! SCORED 400\n", width/2-50,height/2)
             tint(255,blink)
             image(starImg,width/2,height/2-150)
         }
@@ -126,9 +127,7 @@ function draw(){
             blink = 255
         }
         pop()        
-    }
-   
-   
+    }   
 
 }
 function keyPressed(){
@@ -145,18 +144,34 @@ function keyPressed(){
     }
 }
 
-/*function mouseDragged(){
-    if(gamestate === "START")
-    Matter.Body.setPosition( bird.body,{x: mouseX, y: mouseY});
-
-}*/
-
+function mouseDragged(){    
+    if(gamestate === "START"){
+        if(mouseX > 0 && mouseX < 200){
+        dragged = true
+        }
+    }
+}
+   
+/*
 function mouseReleased(){   
     
-    if(gamestate !== "END"){
+    if(gamestate !== "END"){//} && dragged === true){
+        if(mouseX > 0 && mouseX < 200){        
+            lives = lives - 1
+            chain1.fly();
+            gamestate = "FLY";
+            dragged = false
+        }   
+    }
+
+}*/
+function mouseReleased(){   
+    
+    if(gamestate !== "END" && dragged === true){
         lives = lives - 1
         chain1.fly();
         gamestate = "FLY"
+        dragged = false
     }   
 
 }
@@ -166,7 +181,8 @@ async function getBgImage(){
     responseJSON = await response.json()
     var time = responseJSON.currentDateTime
     var hours = time.slice(11,13)
-    if(hours > 6 && hours < 19){
+
+   if(hours > 6 && hours < 19){
         bg = "sprites/bg.png"
 
     }else{
